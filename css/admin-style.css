@@ -1,0 +1,59 @@
+/* CSS Document */
+#wovax-mm-editor {
+	display: block;
+	/*background-color: #f5f5f5;*/
+	background-color: #ebebeb;
+	border: 1px solid #ddd; 
+	border-radius: 2px;
+	margin: 1rem 0;
+}
+
+#wovax-mm-editor > section {
+	padding: 0.5rem 1.5rem 1.5rem;
+	box-sizing: border-box;
+}
+
+#wovax-mm-editor > header {
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #ddd;
+	font-size: 20px;
+    font-weight: 400;
+	padding: 0.75rem 1.5rem;
+}
+
+#wovax-mm-editor .mm-field {
+	padding: 0.5rem 0;
+}
+
+#wovax-mm-subtitle input,
+#wovax-mm-editor input[type="text"] {
+	width: 100%;
+	line-height: 35px;
+	height: 35px;
+	text-indent: 0.5rem;
+	font-size: 1rem;
+	color: #555;
+}
+
+#wovax-mm-subtitle {
+	padding: 1rem 0;
+}
+
+#wovax-mm-editor label {
+	font-weight: bold;
+	display: inline-block;
+	padding-bottom: 0.25rem;
+}
+
+#wovax-mm-subtitle label {
+	display: block;
+	float: left;
+	height: 35px;
+	line-height: 35px;
+	font-size: 20px;
+    font-weight: 400;
+}
+
+#wovax-mm-subtitle .mm-field-inner {
+	margin-left: 130px;
+}

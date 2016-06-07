@@ -4,7 +4,7 @@
  * Class for custom post type music
  * 
  * @author Wovac LLc, Danial Bleile
- * @uses class-wovax-post.php
+ * @uses WOVAX_MM_Post | class-wovax-post.php
  * @version 0.0.1
  */
 
@@ -114,5 +114,15 @@ class WOVAX_MM_Music extends WOVAX_MM_Post {
 		return $clean_settings;
 		
 	} // end get_clean_settings
+	
+	
+	/**
+	  * Enqueue admin scripts
+	  */
+	 public function edit_post_scripts(){
+		 
+		 wp_enqueue_style( 'wovax_mm_admin_css' , plugin_dir_url( dirname( __FILE__ ) ) . 'css/admin-style.css', array() , WOVAX_Music_Manager::$version );
+	 
+	 } // end add_admin_scripts
 	 
 }

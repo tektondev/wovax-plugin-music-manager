@@ -212,4 +212,21 @@ abstract class WOVAX_MM_Post {
 		
 	} // end the_editor	
 	
+	
+	/**
+	 * Check post type and call enqueue function
+	 * if it exists
+	 */
+	public function add_edit_post_scripts(){
+		
+		global $post_type;
+		 
+		 if( ( $this->get_slug() == $post_type ) && method_exists( $this , 'edit_post_scripts') ) {
+			 
+			 $this->edit_post_scripts();
+	
+		 } // end if
+		
+	} // end add_edit_post_scripts
+	
 }
