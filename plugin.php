@@ -57,9 +57,7 @@ class WOVAX_Music_Manager {
 		 
 		 if ( is_admin() ){
 			 
-			 // Add admin css to Edit Music page
-			 add_action( 'admin_print_scripts-post-new.php', array( $music , 'add_edit_post_scripts' ), 11 );
-			 add_action( 'admin_print_scripts-post.php', array( $music , 'add_edit_post_scripts' ), 11 );
+			 add_action( 'admin_enqueue_scripts', array( $this , 'add_admin_scripts' ), 11 );
 			 
 			 // Get save class and create new instance
 			 require_once 'classes/class-wovax-mm-save-post.php'; 
@@ -68,9 +66,45 @@ class WOVAX_Music_Manager {
 			 // Save post
 			 add_action( 'save_post_music' , array( $save_post , 'save' ) );
 			 
-		 } // end if
+		 } else {
+			 
+			 add_action( 'wp_enqueue_scripts' , array( $this, 'add_public_scripts') );
+			 
+		 }// end if
+		 
+		 if ( isset( $_GET['wovax_mm_ajax'] ) ){
+			 
+			 require_once 'classes/class-wovax-mm-ajax.php';
+			 $ajax = new WOVAX_MM_Ajax();
+			 
+			 add_filter( 'template_include', array( $ajax , 'get_template' ) , 99 );
+			 
+		 } // end if 
 		 
 	 } // end init
+	 
+	 
+	 /**
+	  * Add public scripts
+	  */
+	 public function add_public_scripts(){
+		 
+		 wp_enqueue_style( 'wovax_mm_public_style' , plugin_dir_url( __FILE__ ) . 'css/public-style.css', array() , WOVAX_Music_Manager::$version );
+		 wp_enqueue_style( 'font_awesome' , plugin_dir_url( __FILE__ ) . 'font-awesome/css/font-awesome.min.css', array() , WOVAX_Music_Manager::$version );
+		 
+		 wp_enqueue_script( 'wovax_mm_public_script' , plugin_dir_url( __FILE__ ) . 'js/public-script.js', array() , WOVAX_Music_Manager::$version , true );
+		 
+	 } // end add_public_scripts
+	 
+	 
+	 /**
+	  * Add admin scripts
+	  */
+	 public function add_admin_scripts(){
+		 
+		 wp_enqueue_style( 'wovax_mm_admin_style' , plugin_dir_url( __FILE__ ) . 'css/admin-style.css', array() , WOVAX_Music_Manager::$version );
+		 
+	 } // end add_public_scripts
 	 
 	
 } // end WOVAX_Music_Manager

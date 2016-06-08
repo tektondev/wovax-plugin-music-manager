@@ -10,13 +10,24 @@ abstract class WOVAX_MM_Shortcode {
 	
 	
 	//@var string Slug for shortcode
-	public $slug;
+	protected $slug;
+	
+	//@var array Defautls for shortcode
+	protected $defaults = array();
 	
 	
 	//@return string|null Slug for registering shortcode
 	public function get_slug(){
 		
 		return $this->slug;
+		
+	} // end get_slug
+	
+	
+	//@return array Defaults for shortcode
+	public function get_defaults(){
+		
+		return $this->defaults;
 		
 	} // end get_slug
 	
@@ -32,6 +43,8 @@ abstract class WOVAX_MM_Shortcode {
 	
 	
 	public function do_shortcode( $atts , $content , $tag ){
+		
+		$atts = shortcode_atts( $this->get_defaults() , $atts , $tag );
 		
 		$html = '';
 		

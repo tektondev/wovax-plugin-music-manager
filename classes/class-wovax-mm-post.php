@@ -25,6 +25,18 @@ abstract class WOVAX_MM_Post {
 	//@var array Set custom fields for the post type based on $fields
 	protected $settings = array();
 	
+	//@var string Title of the post
+	protected $title;
+	
+	//@var string Content of the post
+	protected $content;
+	
+	//@var string Excerpt for the post
+	protected $excerpt;
+	
+	//@var string URL for the post
+	protected $link;
+	
 	
 	//@return string|null Slug for registering custom post type
 	public function get_slug(){
@@ -90,7 +102,39 @@ abstract class WOVAX_MM_Post {
 			
 		} // end if
 		
-	} // end  
+	} // end
+	
+	
+	//@return string Title for post
+	public function get_title(){
+		
+		return $this->title;
+		
+	} // end get_field 
+	
+	
+	//@return string Content for post
+	public function get_content(){
+		
+		return $this->content;
+		
+	} // end get_content 
+	
+	
+	//@return string Excerpt for post
+	public function get_excerpt(){
+		
+		return $this->excerpt;
+		
+	} // end get_excerpt
+	
+	
+	//@return string Link for post
+	public function get_link(){
+		
+		return $this->link;
+		
+	} // end get_link
 	
 	
 	/**
@@ -130,6 +174,19 @@ abstract class WOVAX_MM_Post {
 		} // end foreach
 		
 	}  // end set_settings
+	
+	
+	public function set_post( $post ){
+		
+		$this->title = apply_filters( 'the_title' , $post->post_title );
+		
+		$this->content = apply_filters( 'the_content' , $post->post_content );
+		
+		$this->excerpt = $post->post_excerpt;
+		
+		$this->link = get_post_permalink( $post->ID );
+		
+	} // end set_post
 	
 	
 	/**

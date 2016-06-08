@@ -57,6 +57,11 @@ class WOVAX_MM_Music extends WOVAX_MM_Post {
 		'_music_page'     => '',
 	);
 	
+	//@var array Defautls for shortcode
+	protected $defaults = array(
+		'display' => 'az-index',
+	);
+	
 	/**
 	 * Include the edit form for custom post type
 	 * 
@@ -119,10 +124,11 @@ class WOVAX_MM_Music extends WOVAX_MM_Post {
 	/**
 	  * Enqueue admin scripts
 	  */
-	 public function edit_post_scripts(){
+	 /*public function edit_post_scripts(){
 		 
-		 wp_enqueue_style( 'wovax_mm_admin_css' , plugin_dir_url( dirname( __FILE__ ) ) . 'css/admin-style.css', array() , WOVAX_Music_Manager::$version );
+		 wp_enqueue_style( 'wovax_mm_music_editor_css' , plugin_dir_url( dirname( __FILE__ ) ) . 'css/editor-style.css', array() , WOVAX_Music_Manager::$version );
 	 
-	 } // end add_admin_scripts
+	 } // end add_admin_scripts*/
+	 
 	 
 }
