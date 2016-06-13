@@ -68,20 +68,48 @@
 
 #wovax-mm-library .wovax-mm-library-index-set > header {
 	background-color: #555;
-	padding: 0.25rem 0.75rem;
+	/*padding: 0.25rem 0.75rem;*/
+	text-align: right;
+	min-height: 35px;
 }
 
 #wovax-mm-library .wovax-mm-library-index-set > header > a {
 	color: #fff;
 	font-weight: bold;
 	text-decoration: none;
+	float: left;
+	display: block;
+	height: 35px;
+	line-height: 35px;
+	padding: 0 1rem;
+}
+
+#wovax-mm-library .wovax-mm-library-index-set > header > ul {
+	display: inline-block;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	height: 35px;
+}
+
+#wovax-mm-library .wovax-mm-library-index-set > header > ul > li {
+	display: inline-block;
+	padding: 0.5rem 0;
+	margin: 0;
+	color: #fff;
+	font-size: 11px;
+	width: 50px;
+	text-align: center;
+	margin-right: 0.5rem;
+	line-height: 14px;
+	vertical-align: bottom;
 }
 
 /* wovax-mm-item
 ----------------------------------------------------------- */
 .wovax-mm-item { 
 	position: relative;
-	padding: 1rem;
+	padding: 16px;
 }
 
 .wovax-mm-item a:hover, .wovax-mm-item a:visited, .wovax-mm-item a:link, a:active {
@@ -90,12 +118,13 @@
 }
 
 .wovax-mm-item:nth-child(odd) {
-	background-color: #eee;
+	background-color: #f1f1f1;
 }
 
 .wovax-mm-item > div {
-	margin-right: 200px;
+	margin-right: 300px;
 	line-height: 1.2rem;
+	min-height: 40px;
 }
 
 .wovax-mm-item .wovax-mm-title {
@@ -111,7 +140,7 @@
 
 .wovax-mm-item > ul {
 	position: absolute;
-	top: 0.5rem;
+	top: 16px;
 	right: 0;
 	margin: 0;
 	padding: 0;
@@ -122,14 +151,61 @@
 	display: inline-block;
 	width: 50px;
 	line-height: 40px;
-	background-color: #ccc;
+	/*background-color: #ccc;*/
 	vertical-align: top;
 	text-align: center;
+	-webkit-box-shadow: 0px -1px 5px 0px rgba(86,93,125,0.4);
+	-moz-box-shadow: 0px -1px 5px 0px rgba(86,93,125,0.4);
+	box-shadow: 0px -1px 5px 0px rgba(86,93,125,0.4);
+	border-radius: 3px;
+	margin-right: 0.5rem;
 }
 
+.wovax-mm-item > ul > li.wovax-mm-item-page-n {
+	font-size: 0.8rem;
+	width: auto;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	font-weight: bold;
+	color: #999;
+}
+
+.wovax-mm-item > ul > li.
+
+
 .wovax-mm-item > ul > li > a {
-	color: #555;
+	/*color: #555;*/
 	text-decoration: none;
+}
+
+@media (max-width:600px){
+	
+	.wovax-mm-item > ul {
+		position: relative;
+		top: 0;
+		display: block;
+		margin-top: 0.5rem;
+	}
+	
+	.wovax-mm-item > div {
+		margin-right: 0;
+	}
+	
+	#wovax-mm-library #wovax-mm-library-az-index > nav > ul > li {
+		margin: 0;
+		padding: 0;
+		float: left;
+		width: 7.5%;
+		text-align: center;
+		display: block;
+		padding: 0.5rem 0;
+	}
+	
+	#wovax-mm-library .wovax-mm-library-index-set > header > ul {
+		display: none;
+	}
+
 }
 
 /* wovax-mm-library-search
@@ -144,8 +220,151 @@
 	margin-right: 40px;
 }
 
+#wovax-mm-library-search > form .mm-search-text input {
+	height: 48px;
+	line-height: 48px;
+}
+
 #wovax-mm-library-search > form .mm-search-submit {
 	position: absolute;
 	top: 2rem;
 	right: 0;
+}
+
+#wovax-mm-library-search > form .mm-search-submit input{
+	height: 48px;
+}
+
+/* wovax-mm-music-subheader
+----------------------------------------------------------- */
+.wovax-mm-music-subheader {
+	padding-bottom: 1.5rem;
+}
+
+.wovax-mm-music-subheader > ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.wovax-mm-music-subheader > ul > li {
+	display: inline-block;	
+	vertical-align: top;
+	margin-right: 0.5rem;
+}
+.wovax-mm-music-subheader > ul > li.wovax-mm-item-page-n {
+	line-height: 40px;
+}
+
+.wovax-mm-music-subheader > ul > li > a {
+	display: block;
+	width: 50px;
+	line-height: 40px;
+	/*background-color: #ccc;*/
+	text-align: center;
+	-webkit-box-shadow: 0px -1px 5px 0px rgba(86,93,125,0.4);
+	-moz-box-shadow: 0px -1px 5px 0px rgba(86,93,125,0.4);
+	box-shadow: 0px -1px 5px 0px rgba(86,93,125,0.4);
+	border-radius: 3px;
+}
+
+.wovax-mm-music-subheader > ul > li > span {
+	display: block;
+	font-size: 11px;
+	text-align: center;
+	line-height: 14px;
+	padding: 3px 0 5px;
+	color: #777;
+}
+
+.wovax-mm-music-subheader > ul > li.wovax-mm-item-page-n {
+	font-size: 0.8rem;
+	width: auto;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	font-weight: bold;
+	color: #999;
+}
+.wovax-mm-music-subheader > a {
+	font-size: 0.8rem;
+	display: inline-block;
+	padding-top: 0.25rem;
+}
+/* Modal Style
+------------------------------------------------------ */
+#wovax-mm-modal-bg {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0,0,0,0.7);
+	z-index: 9998;
+}
+
+#wovax-mm-modal-frame {
+	position: absolute;
+	top: 100px;
+	left: 0;
+	width: 100%;
+}
+
+#wovax-mm-modal-frame .wovax-mm-inner-wrapper{
+	position: relative;
+	max-width: 800px;
+	margin: 0 auto;
+	z-index: 9999;
+	background-color: #fff;
+	padding: 0.5rem;
+	box-sizing: border-box;
+}
+
+#wovax-mm-modal-frame .wovax-close-modal-action {
+	position: absolute;
+	top: -30px;
+	right: -30px;
+	border-radius: 50%;
+	background-color: #555;
+	display: block;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	border: 1px solid #ccc;
+	z-index: 10001;
+}
+
+#wovax-mm-modal-frame .wovax-close-modal-action:before {
+	content: "\f158";
+    font: 400 20px/1 dashicons;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #fff;
+	line-height: 40px;
+}
+
+#wovax-mm-modal-frame .wovax-mm-modal-content {
+	padding-bottom: 56.25%;
+}
+
+#wovax-mm-modal-frame .wovax-mm-modal-content iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+	margin: 0;
+	padding: 0;
+	z-index: 10000;
+}
+
+.wovax-mm-modal-item-content {
+	display: none;
+}
+
+@media (max-width:860px){
+	#wovax-mm-modal-frame .wovax-mm-inner-wrapper{
+		margin: 0 40px;
+	}
 }

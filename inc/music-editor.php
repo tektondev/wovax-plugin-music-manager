@@ -21,7 +21,7 @@
             <label>Link to Video</label>
             <input type="text" name="_music_video" value="<?php echo $this->get_settings('_music_video'); ?>" />
         </div>
-        <div class="mm-field">
+        <div class="mm-field mm-field-25">
             <label>Page #</label>
             <input type="text" name="_music_page" value="<?php echo $this->get_settings('_music_page'); ?>" />
         </div>

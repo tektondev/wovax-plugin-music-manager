@@ -10,10 +10,10 @@ Author URI: https://www.wovax.com/
 
 class WOVAX_Music_Manager {
 	
-	//@var string Version of Wovax Music Manager
+	// @var string Version of Wovax Music Manager
 	public static $version = '0.0.1';
 	
-	//@var object|null Instance of Wovax Music Manager
+	// @var object|null Instance of Wovax Music Manager
 	public static $instance;
 	
 
@@ -70,6 +70,8 @@ class WOVAX_Music_Manager {
 			 
 			 add_action( 'wp_enqueue_scripts' , array( $this, 'add_public_scripts') );
 			 
+			 add_filter( 'the_content' , array( $music , 'add_subheader' ), 99 );
+			 
 		 }// end if
 		 
 		 if ( isset( $_GET['wovax_mm_ajax'] ) ){
@@ -92,7 +94,7 @@ class WOVAX_Music_Manager {
 		 wp_enqueue_style( 'wovax_mm_public_style' , plugin_dir_url( __FILE__ ) . 'css/public-style.css', array() , WOVAX_Music_Manager::$version );
 		 wp_enqueue_style( 'font_awesome' , plugin_dir_url( __FILE__ ) . 'font-awesome/css/font-awesome.min.css', array() , WOVAX_Music_Manager::$version );
 		 
-		 wp_enqueue_script( 'wovax_mm_public_script' , plugin_dir_url( __FILE__ ) . 'js/public-script.js', array() , WOVAX_Music_Manager::$version , true );
+		 wp_enqueue_script( 'wovax_mm_public_script' , plugin_dir_url( __FILE__ ) . 'js/public-script.js', array('jquery') , WOVAX_Music_Manager::$version , true );
 		 
 	 } // end add_public_scripts
 	 

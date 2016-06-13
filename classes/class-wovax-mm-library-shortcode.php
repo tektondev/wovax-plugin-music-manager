@@ -121,8 +121,6 @@ class WOVAX_MM_Library_Shortcode extends WOVAX_MM_Shortcode{
 	protected function get_az_index_html( $atts ){
 		
 		$alpha_posts =  $this->get_all_music_alpha();
-			
-		asort( $alpha_posts );
 		
 		$alpha = range( 'A', 'Z' );
 		

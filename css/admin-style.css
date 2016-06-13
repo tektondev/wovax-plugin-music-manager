@@ -25,6 +25,11 @@
 	padding: 0.5rem 0;
 }
 
+#wovax-mm-editor .mm-field-25 {
+	width: 25%;
+	display: inline-block;
+}
+
 #wovax-mm-subtitle input,
 #wovax-mm-editor input[type="text"] {
 	width: 100%;
@@ -57,3 +62,5 @@
 #wovax-mm-subtitle .mm-field-inner {
 	margin-left: 130px;
 }
+
+

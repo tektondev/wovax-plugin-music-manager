@@ -122,6 +122,48 @@ class WOVAX_MM_Music extends WOVAX_MM_Post {
 	
 	
 	/**
+	 * Checks for singular music and adds subhead
+	 * 
+	 * @param string $content Post content to filter
+	 * @return string Filtered content
+	 */
+	public function add_subheader( $content ){
+		
+		if ( is_singular('music') ){
+			
+			/**
+			 * Plugins and themes can call the_content filter multiple times so
+			 * let's check and make sure we didn't already add this. There is a possibility that
+			 * improper use of the_content in a theme or plugin could cause this to break.
+			 */
+			if ( strpos( $content , 'wovax-mm-music-subheader' ) === false ){
+				
+				global $post;
+				
+				$this->set_settings( $post->ID );
+				
+				ob_start();
+				
+				include plugin_dir_path( dirname( __FILE__ ) ) . 'inc/music-single-subheader.php';
+				
+				return ob_get_clean() . $content;
+				
+			} else {
+				
+				return $content;
+				
+			} // end if
+			
+		} else {
+			
+			return $content;
+			
+		} // end if
+		
+	} // end add_subheader
+	
+	
+	/**
 	  * Enqueue admin scripts
 	  */
 	 /*public function edit_post_scripts(){
