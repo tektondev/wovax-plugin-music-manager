@@ -2,11 +2,11 @@
 <h4 class="wovax-mm-music-subtitle"><?php echo $this->get_settings('_music_subtitle');?></h4>
 <ul>
     <?php if( $this->get_settings( '_music_sheet' ) ):?><li class="wovax-mm-item-sheet">
-    	<a href="<?php echo $this->get_settings( '_music_sheet' );?>"><i class="fa fa-music" aria-hidden="true"></i></a>
+    	<a href="<?php echo $this->get_settings( '_music_sheet' );?>" target="_blank"><i class="fa fa-music" aria-hidden="true"></i></a>
         <span>Sheet</span>
 	</li><?php endif;?>
     <?php if( $this->get_settings( '_music_mp3' ) ):?><li class="wovax-mm-item-mp3">
-    	<a href="<?php echo $this->get_settings( '_music_mp3' );?>"><i class="fa fa-headphones" aria-hidden="true"></i></a>
+    	<a href="<?php echo $this->get_settings( '_music_mp3' );?>" target="_blank"><i class="fa fa-headphones" aria-hidden="true"></i></a>
         <span>MP3</span>
     </li><?php endif;?>
     <?php if( $this->get_settings( '_music_video' ) ):?><li class="wovax-mm-item-video">

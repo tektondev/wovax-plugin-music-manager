@@ -9,14 +9,14 @@
         </li>
     	<li class="wovax-mm-item-sheet">
 			<?php if( $music->get_settings( '_music_sheet' ) ):?>
-            <a href="<?php echo $music->get_settings( '_music_sheet' );?>">
+            <a href="<?php echo $music->get_settings( '_music_sheet' );?>" target="_blank">
                 <i class="fa fa-music" aria-hidden="true"></i>
             </a>
 			<?php endif;?>
         </li>
         <li class="wovax-mm-item-mp3">
 			<?php if( $music->get_settings( '_music_mp3' ) ):?>
-           	<a href="<?php echo $music->get_settings( '_music_mp3' );?>">
+           	<a href="<?php echo $music->get_settings( '_music_mp3' );?>" target="_blank">
             	<i class="fa fa-headphones" aria-hidden="true"></i>
             </a>
 			<?php endif;?>

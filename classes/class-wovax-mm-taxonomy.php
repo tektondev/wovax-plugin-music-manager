@@ -127,5 +127,26 @@ class WOVAX_MM_Taxonomy {
 		return $term_objs;
 		
 	} // end get_terms
+	/**
+	 * Get term name from id
+	 *
+	 * @param int $id Term id
+	 * @return string Term name
+	 */
+	public function get_name( $id ){
+		
+		$term = get_term( $id , $this->get_slug() );
+		
+		if ( $term ){
+			
+			return $term->name;
+			
+		} else {
+			
+			return '';
+			
+		} // end if
+		
+	} // end get_term_name
 	
 }

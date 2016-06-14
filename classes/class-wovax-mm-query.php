@@ -36,25 +36,10 @@ class WOVAX_MM_Query {
 	} // end do_query
 	
 	
-	public function do_azindex_query(){
-		
-		$query_args = array(
-			'posts_per_page' => -1,
-			'orderby'        => 'title',
-		);
-		
-		if ( $tax_args = $this->get_tax_args() ){
-			
-			$query_args['tax_query'] = $tax_args;
-			
-		} // end if
-		
-		$query = $this->do_post_query( $query_args );
-		
-	} // end do_azindex_query
 	
 	
-	protected function do_post_query( $args = array() ){
+	
+	public function do_post_query( $args = array() ){
 		
 		$args = array_merge( $this->query_args , $args );
 		
@@ -65,15 +50,15 @@ class WOVAX_MM_Query {
 	} // end do_post_query
 	
 	
-	protected function get_tax_args(){
+	public function get_tax_args( $taxonomy , $input_name , $field = 'term_id' ){
 		
-		if ( ! empty( $_GET['category'] ) ){
+		if ( ! empty( $_GET[ $input_name ] ) ){
 			
 			$tax_query = array(
 				  array(
-					  'taxonomy' => 'wx_music_category',
-					  'field'    => 'term_id',
-					  'terms'    => sanitize_text_field( $_GET['category'] ),
+					  'taxonomy' => $taxonomy,
+					  'field'    => $field,
+					  'terms'    => sanitize_text_field( $_GET[ $input_name ] ),
 				  ),
 			);
 			

@@ -17,18 +17,18 @@ var wovax_mm = {
 		
 			jQuery('#wovax-mm-library > nav > a').on('click', function( event ){ event.preventDefault(); wovax_mm.library.chng_sec( jQuery( this ) ); });
 			
-			jQuery('#wovax-mm-library-search form .mm-search-text input').keyup( function(){ wovax_mm.library.do_search( jQuery( this ) ); });
+			jQuery('#wovax-mm-library-search .mm-search-text input').keyup( function(){ wovax_mm.query.do_query(true); });
 			
-			jQuery('#wovax-mm-library-search form').on('submit' , function( event ){ event.preventDefault(); wovax_mm.library.do_scroll( jQuery('#wovax-mm-search-results') )}); 
+			jQuery('#wovax-mm-library').on('submit' , function( event ){ event.preventDefault(); wovax_mm.query.do_query( false );}); 
 			
-			jQuery('#wovax-mm-library-search form').on('submit' , function( event ){ event.preventDefault(); wovax_mm.library.do_scroll( jQuery('#wovax-mm-search-results') )});
+			//jQuery('#wovax-mm-library-search form').on('submit' , function( event ){ event.preventDefault(); wovax_mm.library.do_scroll( jQuery('#wovax-mm-search-results') )});
 			
 			jQuery('#wovax-mm-library-az-index > nav > ul > li > a').on('click' , function( event ){ 
 				event.preventDefault(); 
 				var targ = jQuery( '[name="' + jQuery( this ).data('idx') + '"]');
 				wovax_mm.library.do_scroll( targ )});
 				
-			wovax_mm.wrap.on('change' , '.wovax-mm-category > select', function(){ wovax_mm.query.do_query();});
+			wovax_mm.wrap.on('change' , '.wovax-mm-category > select', function(){ wovax_mm.query.do_query( false );});
 			
 		},
 		
@@ -46,19 +46,17 @@ var wovax_mm = {
 				
 				jQuery('.wovax-mm-library-section').eq( ic.index() ).show().siblings('.wovax-mm-library-section').hide();
 				
+				wovax_mm.query.do_query(false);
+				
 			} // end if
 			
 		},
 		
 		do_search: function( inpt ){
 			
-			
-			
 			var val = inpt.val();
 			
 			if ( val.length > 2 ){
-				
-				
 				
 				jQuery.get(
 					wovax_mm_ajax_url + '?wovax_mm_ajax=search',
@@ -89,7 +87,9 @@ var wovax_mm = {
 	
 	query :{
 		
-		do_query:function(){
+		timer: false,
+		
+		do_query:function( is_dynamic ){
 			
 			var actv = wovax_mm.wrap.find('.wovax-mm-library-nav > a.active');
 			
@@ -98,6 +98,9 @@ var wovax_mm = {
 				wovax_mm.query.do_az_query();
 				
 			} else {
+				
+				wovax_mm.query.do_search_query( is_dynamic );
+				
 			} // end if
 			
 		}, // end do_query
@@ -111,26 +114,77 @@ var wovax_mm = {
 			
 		}, //end do_az_query
 		
-		query_results: function( data , container , query_type ){
+		do_search_query : function( is_dynamic ){
+			
+			if ( is_dynamic ){
+				
+				var inpt = wovax_mm.wrap.find( 'input[name="music_term"]');
+				
+				if ( inpt.val().length < 2 ) {
+					
+					return false;
+					
+				} // end if
+				
+			} // end if
+			
+			var data = wovax_mm.wrap.serialize();
+			var cont = wovax_mm.wrap.find( '#wovax-mm-search-results');
+			
+			wovax_mm.query.query_results( data , cont , 'search' );
+			
+		}, // end do_search_query
+		
+		query_results: function( data , wrap , query_type ){
+			
+			clearTimeout( wovax_mm.query.timer );
+			
+			wovax_mm.query.set_active( wrap );
 			
 			jQuery.get(
 				wovax_mm_ajax_url + '?wovax_mm_ajax=query&query_type=' + query_type,
 				data,
 				function( response ){
 					
-					alert( response );
+					console.log( response );
 					
-					//var results = jQuery('.mm-search-results');
+					//wrap.empty();
 					
-					//results.empty();
+					wovax_mm.query.timer = setTimeout(function(){ wovax_mm.query.insert_results( response , wrap ); },300 );
 					
-					//wovax_mm.library.set_resutls( response );
+					//wovax_mm.query.insert_results( response , wrap );
 					
 				},
 				'html'
 			);
 			
 		}, // end query_results
+		
+		insert_results : function( html , wrap ){
+			
+			wrap.empty();
+			
+			wrap.append( html );
+			
+			wovax_mm.query.remove_active( wrap );
+			
+		}, // end insert_results
+		
+		set_active: function( wrap ){
+			
+			wrap.addClass('wovax-loading');
+			
+			wrap.prepend('<div class="wovax-loading-results"><div>Loading Results</div></div>');
+			
+		}, // end set_active
+		
+		remove_active: function( wrap ){
+			
+			wrap.removeClass('wovax-loading');
+			
+			wrap.find( '.wovax-loading-results').remove();
+			
+		}, // remove_active
 		
 	}, // end query
 	
