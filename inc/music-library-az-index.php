@@ -10,5 +10,7 @@
         <?php endforeach;?>
         </ul>
     </nav>
-    <?php echo $az_sections_html;?>
+    <div id="wovax-mm-index-results" class="wovax-mm-results-set">
+    	<?php echo $az_sections_html;?>
+    </div>
 </div>

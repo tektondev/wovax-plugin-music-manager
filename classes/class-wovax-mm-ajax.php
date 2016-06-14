@@ -17,6 +17,10 @@ class WOVAX_MM_Ajax {
 		
 		switch( $_GET['wovax_mm_ajax'] ){
 			
+			case 'query':
+				$template = plugin_dir_path( dirname( __FILE__ ) ). 'library-query.php';
+				break;
+			
 			case 'search':
 				$template = plugin_dir_path( dirname( __FILE__ ) ). 'search.php';
 				break;

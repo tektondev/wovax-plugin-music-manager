@@ -13,7 +13,21 @@ require_once 'class-wovax-mm-shortcode.php';
 class WOVAX_MM_Library_Shortcode extends WOVAX_MM_Shortcode{
 	
 	//@var string Slug for shortcode
-	public $slug = 'musiclibrary';
+	protected $slug = 'musiclibrary';
+	
+	//@var WOVAX_MM_Music_Category Instance
+	protected $music_category;
+	
+	//@var WOVAX_MM_Query Instance
+	protected $query;
+	
+	public function __construct( $music_category , $query ){
+		
+		$this->music_category = $music_category;
+		
+		$this->query = $query;
+		
+	} // end __construct
 	
 	/**
 	 * Get HTML for shortcode display
@@ -31,13 +45,13 @@ class WOVAX_MM_Library_Shortcode extends WOVAX_MM_Shortcode{
 			
 		} else {
 			
-			
-			
 			$display_html .= $this->get_az_index_html( $atts );
 			
 		} // end if
 		
 		$display_html .= $this->get_search_html( $atts );
+		
+		$music_terms = $this->music_category->get_term_names();
 		
 		ob_start();
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'inc/music-library-wrapper.php';

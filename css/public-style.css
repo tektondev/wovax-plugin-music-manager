@@ -3,6 +3,10 @@
 /* #wovax-mm-library > nav 
 ----------------------------------------------------- */
 
+#wovax-mm-library {
+	position: relative;
+}
+
 #wovax-mm-library > nav {
 	border-bottom: 1px solid #ddd;
 }
@@ -12,7 +16,7 @@
 	border-top: 1px solid #ddd;
 	border-left: 1px solid #ddd;
 	border-right: 1px solid #ddd;
-	text-transform: uppercase;
+	text-trans.wovax-mm-search: uppercase;
 	padding: 1rem 2rem;
 	text-decoration: none;
 	box-shadow: none;
@@ -25,6 +29,12 @@
 
 #wovax-mm-library > nav > a.active {
 	background-color: #fff;
+}
+
+#wovax-mm-library > .wovax-mm-category {
+	position: absolute;
+	top: 0;
+	right: 0;
 }
  
 /* #wovax-mm-library-az-index
@@ -211,16 +221,16 @@
 /* wovax-mm-library-search
 -----------------------------------------------*/
 
-#wovax-mm-library-search > form {
+#wovax-mm-library-search > .wovax-mm-search {
 	padding: 2rem 0;
 	position: relative;
 }
 
-#wovax-mm-library-search > form .mm-search-text {
+#wovax-mm-library-search > .wovax-mm-search .mm-search-text {
 	/*margin-right: 40px*/;
 }
 
-#wovax-mm-library-search > form .mm-search-text input {
+#wovax-mm-library-search > .wovax-mm-search .mm-search-text input {
 	height: 48px;
 	line-height: 48px;
 	padding: 0;
@@ -230,13 +240,13 @@
 	box-sizing: border-box;
 }
 
-#wovax-mm-library-search > form .mm-search-submit {
+#wovax-mm-library-search > .wovax-mm-search .mm-search-submit {
 	position: absolute;
 	top: 2rem;
 	right: 0;
 }
 
-#wovax-mm-library-search > form .mm-search-submit input{
+#wovax-mm-library-search > .wovax-mm-search .mm-search-submit input{
 	height: 48px;
 	padding: 0 1rem;
 }

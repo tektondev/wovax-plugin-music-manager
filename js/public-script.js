@@ -1,5 +1,7 @@
 var wovax_mm = {
 	
+	wrap : jQuery('#wovax-mm-library'),
+	
 	init:function(){
 		
 		wovax_mm.library.bind_events();
@@ -25,6 +27,8 @@ var wovax_mm = {
 				event.preventDefault(); 
 				var targ = jQuery( '[name="' + jQuery( this ).data('idx') + '"]');
 				wovax_mm.library.do_scroll( targ )});
+				
+			wovax_mm.wrap.on('change' , '.wovax-mm-category > select', function(){ wovax_mm.query.do_query();});
 			
 		},
 		
@@ -82,6 +86,53 @@ var wovax_mm = {
 		} // end set_results
 		
 	}, // end library
+	
+	query :{
+		
+		do_query:function(){
+			
+			var actv = wovax_mm.wrap.find('.wovax-mm-library-nav > a.active');
+			
+			if ( 'az-index-wrap' == actv.data('section') ){
+				
+				wovax_mm.query.do_az_query();
+				
+			} else {
+			} // end if
+			
+		}, // end do_query
+		
+		do_az_query : function(){
+			
+			var data = wovax_mm.wrap.serialize();
+			var cont = wovax_mm.wrap.find( '#wovax-mm-index-results');
+			
+			wovax_mm.query.query_results( data , cont , 'azindex' );
+			
+		}, //end do_az_query
+		
+		query_results: function( data , container , query_type ){
+			
+			jQuery.get(
+				wovax_mm_ajax_url + '?wovax_mm_ajax=query&query_type=' + query_type,
+				data,
+				function( response ){
+					
+					alert( response );
+					
+					//var results = jQuery('.mm-search-results');
+					
+					//results.empty();
+					
+					//wovax_mm.library.set_resutls( response );
+					
+				},
+				'html'
+			);
+			
+		}, // end query_results
+		
+	}, // end query
 	
 	modal : {
 		
@@ -151,6 +202,7 @@ var wovax_mm = {
 			wovax_mm.modal.frame.css( 'top' , wh + 100 );
 			
 		}, // end_set_height
+		
 		
 	}, // end modal
 	

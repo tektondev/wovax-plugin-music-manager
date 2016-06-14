@@ -40,17 +40,26 @@ class WOVAX_Music_Manager {
 	  */
 	 public function init(){
 		 
+		 require_once 'classes/class-wovax-mm-music-category.php';
+		 $music_category = new WOVAX_MM_Music_Category();
+		 
 		 require_once 'classes/class-wovax-mm-music.php'; 
 		 $music = new WOVAX_MM_Music();
 		 
+		 require_once 'classes/class-wovax-mm-query.php';
+		 $query = new WOVAX_MM_Query();
+		 
 		 require_once 'classes/class-wovax-mm-library-shortcode.php';
-		 $library = new WOVAX_MM_Library_Shortcode();
+		 $library = new WOVAX_MM_Library_Shortcode( $music_category , $query );
 		 
 		 // Register post type
 		 add_action( 'init' , array( $music , 'register' ) );
 		 
 		 // Add Shortcode
 		 add_action( 'init' , array( $library , 'register' ) );
+		 
+		 // Add Taxonomy
+		 add_action( 'init' , array( $music_category , 'register' ), 99 );
 		 
 		 // Add edit form to edit post page for music post type
 		 add_action( 'edit_form_after_title' , array( $music , 'the_editor' ) );
