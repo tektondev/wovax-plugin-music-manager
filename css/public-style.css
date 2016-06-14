@@ -217,12 +217,17 @@
 }
 
 #wovax-mm-library-search > form .mm-search-text {
-	margin-right: 40px;
+	/*margin-right: 40px*/;
 }
 
 #wovax-mm-library-search > form .mm-search-text input {
 	height: 48px;
 	line-height: 48px;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	text-indent: 0.5rem;
+	box-sizing: border-box;
 }
 
 #wovax-mm-library-search > form .mm-search-submit {
@@ -233,6 +238,7 @@
 
 #wovax-mm-library-search > form .mm-search-submit input{
 	height: 48px;
+	padding: 0 1rem;
 }
 
 /* wovax-mm-music-subheader
