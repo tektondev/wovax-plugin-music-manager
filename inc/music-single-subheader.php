@@ -20,5 +20,5 @@
     	Page No. <?php echo $this->get_settings( '_music_page' );?>
     </li><?php endif;?>
 </ul>
-<a href="http://wovax.tektondev.com/music/"><span>&#8592;</span> Music Archive</a>
+<a href="/music-library/"><span>&#8592;</span> Music Archive</a>
 </div>

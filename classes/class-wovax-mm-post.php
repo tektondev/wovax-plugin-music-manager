@@ -178,7 +178,9 @@ abstract class WOVAX_MM_Post {
 	
 	public function set_post( $post ){
 		
-		$this->title = apply_filters( 'the_title' , $post->post_title );
+		//$this->title = apply_filters( 'the_title' , $post->post_title );
+		
+		$this->title = $post->post_title;
 		
 		$this->content = apply_filters( 'the_content' , $post->post_content );
 		

@@ -126,6 +126,12 @@ class WOVAX_MM_Library_Shortcode extends WOVAX_MM_Shortcode{
 		
 		$query = new WP_Query($this->get_az_query_args() );
 		
+		usort($query->posts, function( $a , $b) {
+			
+   			return strnatcmp($a->post_title , $b->post_title);
+			
+		}); // sort titles natrually
+		
 		$music_array = $this->get_music_from_query( $query );
 		
 		$alpha_music = $this->get_music_alpha( $music_array );
