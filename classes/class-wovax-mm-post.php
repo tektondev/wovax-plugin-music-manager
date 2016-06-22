@@ -25,6 +25,9 @@ abstract class WOVAX_MM_Post {
 	//@var array Set custom fields for the post type based on $fields
 	protected $settings = array();
 	
+	//@var int ID of the post
+	protected $id;
+	
 	//@var string Title of the post
 	protected $title;
 	
@@ -105,6 +108,14 @@ abstract class WOVAX_MM_Post {
 	} // end
 	
 	
+	//@return int ID for post
+	public function get_id(){
+		
+		return $this->id;
+		
+	} // end get_field 
+	
+	
 	//@return string Title for post
 	public function get_title(){
 		
@@ -181,6 +192,8 @@ abstract class WOVAX_MM_Post {
 		//$this->title = apply_filters( 'the_title' , $post->post_title );
 		
 		$this->title = $post->post_title;
+		
+		$this->id = $post->ID;
 		
 		$this->content = apply_filters( 'the_content' , $post->post_content );
 		

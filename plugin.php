@@ -40,6 +40,9 @@ class WOVAX_Music_Manager {
 	  */
 	 public function init(){
 		 
+		 require_once 'classes/class-wovax-mm-library.php';
+		 $music_library = new WOVAX_MM_Library(); 
+		 
 		 require_once 'classes/class-wovax-mm-music-category.php';
 		 $music_category = new WOVAX_MM_Music_Category();
 		 
@@ -67,6 +70,11 @@ class WOVAX_Music_Manager {
 		 if ( is_admin() ){
 			 
 			 add_action( 'admin_enqueue_scripts', array( $this , 'add_admin_scripts' ), 11 );
+			 
+			 require_once 'classes/class-wovax-mm-selector.php';
+			 $music_selector = new WOVAX_MM_Selector( $music_library );
+			 add_action('init' , array( $music_selector , 'init' ) );
+			 
 			 
 			 // Get save class and create new instance
 			 require_once 'classes/class-wovax-mm-save-post.php'; 
