@@ -74,7 +74,11 @@
     background-color: #eee;
 }
 
-#wovax-music-selector-form:after {
+#wovax-music-selector-form .mm-columns-wrap:after {
+	content: "";
+	display: block;
+	clear: both;
+}after {
 	content: "";
 	display: block;
 	clear: both;
@@ -105,7 +109,8 @@
 	background-color: #0085ba;
 	border-radius: 3px;
 	font-weight: bold;
-	cursor: grab;
+	position: relative;
+	cursor: move;
 }
 
 #wovax-music-selector-results > li {
@@ -114,6 +119,22 @@
 	display: block;
 	padding: 0.25rem 1.5rem;
 	border-bottom: 1px solid #eee;
+	position: relative;
+	margin: 0;
+	min-height: 40px;
+	box-sizing: border-box;
+}
+
+#wovax-music-selector-results > li .mm-add-music {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 40px;
+	height: 100%;
+	background-image:url(../images/add-icon.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 20px auto;
 }
 
 #wovax-music-selector-form .mm-selector-field {
@@ -150,22 +171,37 @@
 	box-sizing: border-box;
 }
 
+#wovax-music-selector-form > footer {
+	background-color: #fff;
+	text-align: center;
+	padding: 1rem 0;
+}
+
+#wovax-music-selector-form > footer input[type="button"],
+#wovax-music-selector-form > footer input[type="submit"] {
+	background-color: #0085ba;
+	color: #fff;
+	border: none;
+	outline: none;
+	padding: 0.5rem 1rem;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
 #wovax-music-selector-form h3 {
 	min-height: 40px;
 	margin: 0;
 	padding: 0;
 }
 
-#wovax-music-selector-shortcode {
-	margin: 0 1rem;
-}
-
-#wovax-music-selector-shortcode label{
+#wovax-music-selector-form .mm-shortcode {
+	padding: 0.5rem 0;
+	color: #777;
 	font-weight: bold;
 }
 
-#wovax-music-selector-shortcode input {
-	width: 100%;
+#wovax-music-selector-shortcode {
+	
 }
 
 

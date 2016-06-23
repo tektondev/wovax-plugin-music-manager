@@ -16,6 +16,10 @@ var wovax_mm = {
 			
 			wovax_mm.wrap.find('input[name="s_term"]').keyup( function(){ wovax_mm.form.do_search( true , jQuery( this ) ); });
 			
+			wovax_mm.wrap.find('footer input[type="submit"]').on( 'click' , function( event ){ event.preventDefault(); wovax_mm.form.insert(); });
+			
+			wovax_mm.wrap.find('#wovax-music-selector-results').on( 'click' , '.mm-add-music' , function( event ){ event.preventDefault(); wovax_mm.form.add_item( jQuery( this ) ); });
+			
 		}, // end bind_events
 		
 		apply_sort: function( wrap ){
@@ -66,7 +70,7 @@ var wovax_mm = {
 			
 			var sel = wovax_mm.wrap.find('#wovax-music-selector-items');
 			
-			var inpt = wovax_mm.wrap.find('#wovax-music-selector-shortcode input');
+			var sc = wovax_mm.wrap.find('#wovax-music-selector-shortcode');
 			
 			var ids = new Array();
 			
@@ -76,9 +80,29 @@ var wovax_mm = {
 				
 			});
 			
-			inpt.val( '[music_list ids="' + ids.join(',') + '"]' );
+			sc.html( '[musicitems ids="' + ids.join(',') + '"]' );
 			
-		}
+		}, // end update_shortcode
+		
+		insert: function(){
+			
+			var sc = wovax_mm.wrap.find('#wovax-music-selector-shortcode');
+			
+			var ed = tinyMCE.get('content');
+			
+			ed.execCommand('mceInsertContent', 0, sc.html() );
+
+		}, // end insert
+		
+		add_item: function( ic ){
+			
+			var sel = wovax_mm.wrap.find('#wovax-music-selector-items');
+			
+			sel.append( ic.closest('li').clone() );
+			
+			wovax_mm.form.update_shortcode();
+			
+		}, // end add item
 		
 	}, // end form
 	
