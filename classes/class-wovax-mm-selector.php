@@ -15,7 +15,7 @@
 		 $this->library = $library;
 		 
 	 }
-
+	
 	 
 	 public function init(){
 		 
@@ -23,39 +23,41 @@
 		 
 		 add_action('edit_form_after_title' , array( $this , 'the_selector_box' ) );
 		 
+
+		 
 	 }
 	 
 	 public function add_music_button(){
 		 
-		 echo '<a href="#TB_inline?width=600&inlineId=wovax-mm-selector&height=auto" id="insert-music" class="button thickbox">Add Music</a>';
+		 echo '<a href="#TB_inline?width=100%&inlineId=wovax-mm-selector&height=auto" id="insert-music" class="button thickbox">Add Music</a>';
 		 
 	 }
 	 
-	 public function the_selector_box(){
-		 
-		 $query = $this->library->get_search_query( false );
-		 
-		 $music_array = $this->library->get_music_from_query( $query );
-		
-		 uasort( $music_array , array( $this->library , 'sort_search_array' ) );
-		 
-		 ob_start();
-		 
-		 foreach( $music_array as $music ){
-			 
-			 include plugin_dir_path( dirname( __FILE__ ) ) . 'inc/music-editor-selector-music-item.php';
-			 
-		 } // end foreach
-		 
-		 $music_html = ob_get_clean();
-		 
-		 add_thickbox();
-		 
-		 include plugin_dir_path( dirname( __FILE__ ) ) . 'inc/music-editor-selector.php';
-		 
-	 }
+	public function the_selector_box(){
+	   
+	   $query = $this->library->get_search_query( false );
+	   
+	   $music_array = $this->library->get_music_from_query( $query );
+	  
+	   uasort( $music_array , array( $this->library , 'sort_search_array' ) );
+	   
+	   ob_start();
+	   
+	   foreach( $music_array as $music ){
+		   
+		   include plugin_dir_path( dirname( __FILE__ ) ) . 'inc/music-editor-selector-music-item.php';
+		   
+	   } // end foreach
+	   
+	   $music_html = ob_get_clean();
+	   
+	   add_thickbox();
+	   
+	   include plugin_dir_path( dirname( __FILE__ ) ) . 'inc/music-editor-selector.php';
+	   
+	}
 	 
-	 
+	  
 	 /**
 	  * Register plugin to TinyMCE
 	  *

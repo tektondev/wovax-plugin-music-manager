@@ -55,6 +55,9 @@ class WOVAX_Music_Manager {
 		 require_once 'classes/class-wovax-mm-library-shortcode.php';
 		 $library = new WOVAX_MM_Library_Shortcode( $music_category , $query );
 		 
+		 require_once 'classes/class-wovax-mm-ajax.php';
+		 $ajax = new WOVAX_MM_Ajax( $music_library );
+		 
 		 // Register post type
 		 add_action( 'init' , array( $music , 'register' ) );
 		 
@@ -69,7 +72,7 @@ class WOVAX_Music_Manager {
 		 
 		 if ( is_admin() ){
 			 
-			 add_action( 'admin_enqueue_scripts', array( $this , 'add_admin_scripts' ), 11 );
+			 add_action( 'admin_enqueue_scripts', array( $this , 'add_admin_scripts' ), 11, 1 );
 			 
 			 require_once 'classes/class-wovax-mm-selector.php';
 			 $music_selector = new WOVAX_MM_Selector( $music_library );
@@ -83,6 +86,8 @@ class WOVAX_Music_Manager {
 			 // Save post
 			 add_action( 'save_post_music' , array( $save_post , 'save' ) );
 			 
+			 add_action( 'wp_ajax_music_selector_search', array( $ajax , 'the_music_selector_search' ) );
+			 
 		 } else {
 			 
 			 add_action( 'wp_enqueue_scripts' , array( $this, 'add_public_scripts') );
@@ -92,9 +97,6 @@ class WOVAX_Music_Manager {
 		 }// end if
 		 
 		 if ( isset( $_GET['wovax_mm_ajax'] ) ){
-			 
-			 require_once 'classes/class-wovax-mm-ajax.php';
-			 $ajax = new WOVAX_MM_Ajax();
 			 
 			 add_filter( 'template_include', array( $ajax , 'get_template' ) , 99 );
 			 
@@ -119,11 +121,17 @@ class WOVAX_Music_Manager {
 	 /**
 	  * Add admin scripts
 	  */
-	 public function add_admin_scripts(){
+	 public function add_admin_scripts( $hook ){
 		 
-		 wp_enqueue_style( 'wovax_mm_admin_style' , plugin_dir_url( __FILE__ ) . 'css/admin-style.css', array() , WOVAX_Music_Manager::$version );
+		 if ( $hook == 'post-new.php' || $hook == 'post.php' ) {
+					 
+			wp_enqueue_script(  'wovax_mm_selector_js', plugin_dir_url(  __FILE__  ) .'js/admin-script.js' , array('jquery-ui-draggable','jquery-ui-droppable','jquery-ui-sortable') , WOVAX_Music_Manager::$version , true );
+				
+			wp_enqueue_style( 'wovax_mm_admin_style' , plugin_dir_url( __FILE__ ) . 'css/admin-style.css', array() , WOVAX_Music_Manager::$version );
+			
+		} // end if
 		 
-	 } // end add_public_scripts
+	 } // end add_admin_scripts
 	 
 	
 } // end WOVAX_Music_Manager
