@@ -9,10 +9,14 @@
 	 
 	 protected $library;
 	 
+	 protected $music_category;
 	 
-	 public function __construct( $library ){
+	 
+	 public function __construct( $library , $music_category ){
 		 
 		 $this->library = $library;
+		 
+		 $this->music_category = $music_category;
 		 
 	 }
 	
@@ -22,8 +26,6 @@
 		 add_action('media_buttons', array( $this , 'add_music_button' ) );
 		 
 		 add_action('admin_footer' , array( $this , 'the_selector_box' ) );
-		 
-
 		 
 	 }
 	 
@@ -38,6 +40,8 @@
 	   $query = $this->library->get_search_query( false );
 	   
 	   $music_array = $this->library->get_music_from_query( $query );
+	   
+	   $music_terms = $this->music_category->get_select_terms();
 	  
 	   uasort( $music_array , array( $this->library , 'sort_search_array' ) );
 	   
@@ -50,8 +54,6 @@
 	   } // end foreach
 	   
 	   $music_html = ob_get_clean();
-	   
-	   add_thickbox();
 	   
 	   include plugin_dir_path( dirname( __FILE__ ) ) . 'inc/music-editor-selector.php';
 	   

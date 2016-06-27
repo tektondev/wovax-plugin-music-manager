@@ -11,6 +11,11 @@
                     <div class="mm-selector-field">
                         <input type="text" name="s_term" value="" placeholder="Search Term" /><input type="button" class="mm-selector-search" value="GO" />
                     </div>
+                    <div class="mm-selector-field mm-category">
+                        <label>Filter: </label><select name="music_category">
+                        	<?php echo $music_terms;?>
+                        </select>
+                    </div>
                     </fieldset>
                     <ul id="wovax-music-selector-results" class="mm-selector-results mm-items connected-sortable">
                         <?php echo $music_html;?>
@@ -18,7 +23,12 @@
                     
                 </section>
                 <section class="mm-column">
+                	<header>
+                    <div class="mm-title">
+                        <input type="text" name="music_title" value="" placeholder="Add Title" />
+                    </div>
                     <h3>Selected Music</h3>
+                    </header>
                     <ul id="wovax-music-selector-items" class="mm-items connected-sortable">
                     </ul>
                 </section>

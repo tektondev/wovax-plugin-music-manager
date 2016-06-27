@@ -1,7 +1,12 @@
 <?php
 class WOVAX_MM_Library {
 	
-	
+	/**
+	 * Do query by set of ids
+	 *
+	 * @param array $ids Array of music ids
+	 * @return WP_Query
+	 */
 	public function get_id_query( $ids ){
 		
 		$args = array(
@@ -20,6 +25,12 @@ class WOVAX_MM_Library {
 	} // end get_id_query
 	
 	
+	/**
+	 * Get search query from term
+	 *
+	 * @param string $s Search term
+	 * @return WP_Query 
+	 */
 	public function get_search_query( $s ){
 		
 		$query_args = $this->get_search_query_args( $s );
@@ -35,13 +46,42 @@ class WOVAX_MM_Library {
 		// we also need to set post count correctly so as to enable the looping
 		$query->post_count = count( $query->posts );
 		
+		usort($query->posts, function( $a , $b) {
+			
+   			return strnatcmp($a->post_title , $b->post_title);
+			
+		}); // sort titles natrually
+		
 		return $query;
 		
 	} // end get_search_query
 	
 	
 	/**
+	 * Get az-index query
+	 * 
+	 * @return array WP_Query
+	 */
+	public function get_az_query(){
+		
+		$query = new WP_Query($this->get_az_query_args() );
+		
+		usort($query->posts, function( $a , $b) {
+			
+   			return strnatcmp($a->post_title , $b->post_title);
+			
+		}); // sort titles natrually
+		
+		return $query;
+		
+	} // end get_az_query
+	
+	
+	/**
 	 * Get search query args
+	 * @param string $s Search term
+	 * @param bool $is_meta Do meta search
+	 * @return array WP Query args
 	 */
 	public function get_search_query_args( $s , $is_meta = false ){
 		
@@ -91,6 +131,31 @@ class WOVAX_MM_Library {
 	
 	
 	/**
+	 * Get AZ query args
+	 * @return array WP Query args
+	 */
+	public function get_az_query_args(){
+		
+		$query_args = array(
+			'posts_per_page' => -1,
+			'orderby'        => 'title',
+			'post_type'      => 'music',
+			'post_status'    => 'publish',
+			'order'          => 'ASC',
+		);
+		
+		if ( $tax_args = $this->get_tax_args() ){
+			
+			$query_args['tax_query'] = $tax_args;
+			
+		} // end if
+		
+		return $query_args;
+		
+	} // end get_az_query_args
+	
+	
+	/**
 	 * Convert WP_Query object to assoc array with
 	 * with WOVAX_MM_Music instances
 	 * 
@@ -136,13 +201,25 @@ class WOVAX_MM_Library {
 	 */
 	public function get_tax_args(){
 		
+		$music_cat = false;
+		
 		if ( ! empty( $_GET[ 'music_category' ] ) ){
+			
+			$music_cat = sanitize_text_field( $_GET[ 'music_category' ] );
+			
+		} else if ( ! empty( $_POST[ 'music_category' ] ) ){
+			
+			$music_cat = sanitize_text_field( $_POST[ 'music_category' ] );
+			
+		} // end if
+		
+		if ( $music_cat ){
 			
 			$tax_query = array(
 				  array(
 					  'taxonomy' => 'wx_music_category',
 					  'field'    => 'term_id',
-					  'terms'    => sanitize_text_field( $_GET[ 'music_category' ] ),
+					  'terms'    => $music_cat,
 				  ),
 			);
 			
@@ -157,11 +234,35 @@ class WOVAX_MM_Library {
 	} // end get_tax_args
 	
 	
-	public function sort_search_array( $a , $b ){
+	/**
+	 * Get music items html
+	 * 
+	 * @param array $music Array of WOVAX_MM_Music instances
+	 * @return string HTML for music items
+	 */
+	public function get_music_items_html( $music_array , $include_sorry = true ){
 		
-		return strcmp( $a->get_title() , $b->get_title() );
+		$items_html = '';
 		
-	} // end sort_search_array
+		if ( ! empty( $music_array ) ){
+		
+			foreach( $music_array as $music ){
+				
+				ob_start();
+				include plugin_dir_path( dirname( __FILE__ ) ) . 'inc/music-item.php';
+				$items_html .= ob_get_clean();
+				
+			} // end foreach
+		
+		} else if ( $include_sorry ) {
+			
+			$items_html = '<div class="wovax-mm-no-results">Sorry, we couldn\'t find any items that match your search. Please try again.</div>';
+			
+		} // end if
+		
+		return $items_html;
+		
+	} // end get_music_items_html
 	
 	
-}
+} // end WOVAX_MM_Library

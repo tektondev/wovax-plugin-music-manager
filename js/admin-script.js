@@ -26,6 +26,10 @@ var wovax_mm = {
 			
 			wovax_mm.wrap.find('#wovax-music-selector-items').on( 'click' , '.mm-remove-music' , function( event ){ event.preventDefault(); wovax_mm.form.remove_item( jQuery( this ) ); });
 			
+			wovax_mm.wrap.find('input[name="music_title"]').on('keyup', function(){ wovax_mm.form.update_shortcode(); });
+			
+			wovax_mm.wrap.find('select[name="music_category"]').on('change', function(){ wovax_mm.form.update_shortcode(); wovax_mm.form.do_search( false , wovax_mm.wrap.find('input[name="s_term"]') ); });
+			
 			wovax_mm.wrap.find('input.mm-selector-search').on( 'click' , function( event ){ 
 				event.preventDefault(); 
 				wovax_mm.form.do_search( false , wovax_mm.wrap.find('input[name="s_term"]') ) 
@@ -50,21 +54,27 @@ var wovax_mm = {
 			
 			if ( is_dynamic && ( val.length < 2 && val.length > 0 ) ) return;
 			
-			wovax_mm.form.get_search( val );
+			var data = wovax_mm.wrap.find('fieldset').serialize();
+			
+			wovax_mm.form.get_search( data );
 			
 		}, //end do search
 		
-		get_search: function( val ){
+		get_search: function( data ){
 			
 			var r_wrap = wovax_mm.wrap.find('#wovax-music-selector-results');
 			
 			r_wrap.addClass('active');
 			
+			data += '&action=music_selector_search';
+			
 			jQuery.post(
 			
 				ajaxurl,
 				
-				{ s : val , action : 'music_selector_search' },
+				//{ s : val , action : 'music_selector_search' },
+				
+				data,
 				
 				function( response ){
 					
@@ -73,8 +83,6 @@ var wovax_mm = {
 					setTimeout( function(){ r_wrap.removeClass('active'); }, 100 );
 					
 					r_wrap.append( response );
-					
-					
 					
 				},
 				
@@ -89,6 +97,8 @@ var wovax_mm = {
 			
 			var sc = wovax_mm.wrap.find('#wovax-music-selector-shortcode');
 			
+			var st = wovax_mm.wrap.find('input[name="music_title"]').val();
+			
 			var ids = new Array();
 			
 			sel.children().each( function(){
@@ -97,7 +107,21 @@ var wovax_mm = {
 				
 			});
 			
-			sc.html( '[musicitems ids="' + ids.join(',') + '"]' );
+			var code = '[musicitems';
+			
+			if ( st ){
+				
+				code += ' title="' + st + '"';
+				
+			} // end if
+			
+			if ( ids.length > 0 ){
+				
+				code += ' ids="' + ids.join(',') + '"';
+				
+			} // end if
+			
+			sc.html( code + ']' );
 			
 		}, // end update_shortcode
 		

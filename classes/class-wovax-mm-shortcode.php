@@ -44,7 +44,7 @@ abstract class WOVAX_MM_Shortcode {
 	
 	public function do_shortcode( $atts , $content , $tag ){
 		
-		shortcode_atts( $this->get_defaults() , $atts , $tag );
+		$atts = shortcode_atts( $this->get_defaults() , $atts , $tag );
 		
 		$html = '';
 		

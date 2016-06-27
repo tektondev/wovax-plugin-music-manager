@@ -149,4 +149,32 @@ class WOVAX_MM_Taxonomy {
 		
 	} // end get_term_name
 	
+	
+	/**
+	 * Get taxonomy terms as select options
+	 *
+	 * @return string HTML options
+	 */
+	public function get_select_terms( $include_empty = true ){
+		
+		$options = '';
+		
+		$terms = $this->get_term_names();
+		
+		if ( $include_empty ){
+		
+			$options .= '<option value="">Select...</option>';
+		
+		} // end if
+		
+		foreach( $terms as $term_id => $term_name ){
+			
+			$options .= '<option value="' . $term_id . '">' . $term_name . '</option>';
+			
+		} // end foreach
+		
+		return $options;
+		
+	} // end get_select_terms
+	
 }

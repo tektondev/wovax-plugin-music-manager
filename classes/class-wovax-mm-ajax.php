@@ -43,9 +43,9 @@ class WOVAX_MM_Ajax {
 	
 	public function the_music_selector_search(){
 		
-		if ( isset( $_POST['s'] ) ){
+		if ( isset( $_POST['s_term'] ) ){
 			
-			$s = sanitize_text_field( $_POST['s'] );
+			$s = sanitize_text_field( $_POST['s_term'] );
 			
 		} else {
 			

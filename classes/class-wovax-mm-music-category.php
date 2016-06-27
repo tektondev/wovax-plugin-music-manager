@@ -39,4 +39,5 @@ class WOVAX_MM_Music_Category extends WOVAX_MM_Taxonomy {
 	
 	//@var array Add to post types
 	protected $post_types = array( 'music' );
+	
 }

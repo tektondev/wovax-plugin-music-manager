@@ -134,6 +134,11 @@
 	box-sizing: border-box;
 }
 
+#wovax-music-selector-form .mm-column > header{
+	min-height: 88px;
+}
+
+
 #wovax-music-selector-form .mm-column > ul {
 	background: #fff;
 	border: 1px solid #0085ba;
@@ -216,6 +221,15 @@
 	position: relative;
 }
 
+#wovax-music-selector-form .mm-selector-field.mm-category {
+	padding-top: 0.5rem;
+}
+
+#wovax-music-selector-form .mm-selector-field.mm-category select {
+	border: 1px solid #0085ba;
+	border-radius: 3px;
+}
+
 #wovax-music-selector-form .mm-selector-field input[type="text"]{
 	height: 40px;
 	line-height: 40px;
@@ -245,6 +259,19 @@
 	box-sizing: border-box;
 }
 
+#wovax-music-selector-form input[name="music_title"]{
+	height: 40px;
+	line-height: 40px;
+	outline: none;
+	border: 1px solid #0085ba;
+	border-radius: 3px;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	text-indent: 0.5rem;
+}
+
 #wovax-music-selector-form > footer {
 	background-color: #fff;
 	text-align: center;
@@ -265,11 +292,10 @@
 #wovax-music-selector-form h3 {
 	min-height: 40px;
 	margin: 0;
-	padding: 0;
+	padding: 30px 0 0;
 	vertical-align: bottom;
 	color: #0085ba;
 	box-sizing: border-box;
-	padding-top: 20px;
 }
 
 #wovax-music-selector-form .mm-shortcode {

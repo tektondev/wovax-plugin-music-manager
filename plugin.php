@@ -3,7 +3,7 @@
 Plugin Name: Wovax Music Manager
 Plugin URI: https://www.wovax.com/
 Description: This is the Wovax plugin for adding and categorizing music.
-Version: 0.0.1
+Version: 0.0.2
 Author: Wovax, LLC.
 Author URI: https://www.wovax.com/
 */
@@ -34,11 +34,17 @@ class WOVAX_Music_Manager {
 		 
 	 } // end get_instance
 	 
+	 /**
+	  * 
+	 
 	 
 	 /**
 	  * Method called when plugin is initialized for hooks & filters
 	  */
 	 public function init(){
+		 
+		 register_deactivation_hook( __FILE__, 'flush_rewrite_rules' );
+		 register_activation_hook( __FILE__, array( $this , 'wovax_mm_flush_rewrites') );
 		 
 		 require_once 'classes/class-wovax-mm-library.php';
 		 $music_library = new WOVAX_MM_Library(); 
@@ -49,11 +55,11 @@ class WOVAX_Music_Manager {
 		 require_once 'classes/class-wovax-mm-music.php'; 
 		 $music = new WOVAX_MM_Music();
 		 
-		 require_once 'classes/class-wovax-mm-query.php';
-		 $query = new WOVAX_MM_Query();
+		 /*require_once 'classes/class-wovax-mm-query.php';
+		 $query = new WOVAX_MM_Query();*/
 		 
 		 require_once 'classes/class-wovax-mm-library-shortcode.php';
-		 $library = new WOVAX_MM_Library_Shortcode( $music_category , $query );
+		 $library = new WOVAX_MM_Library_Shortcode( $music_category , $music_library );
 		 
 		 require_once 'classes/class-wovax-mm-musicitems-shortcode.php';
 		 $musicitems = new WOVAX_MM_Musicitems_Shortcode( $music_library );
@@ -81,7 +87,7 @@ class WOVAX_Music_Manager {
 			 add_action( 'admin_enqueue_scripts', array( $this , 'add_admin_scripts' ), 11, 1 );
 			 
 			 require_once 'classes/class-wovax-mm-selector.php';
-			 $music_selector = new WOVAX_MM_Selector( $music_library );
+			 $music_selector = new WOVAX_MM_Selector( $music_library , $music_category );
 			 add_action('init' , array( $music_selector , 'init' ) );
 			 
 			 
@@ -116,10 +122,22 @@ class WOVAX_Music_Manager {
 	  */
 	 public function add_public_scripts(){
 		 
-		 wp_enqueue_style( 'wovax_mm_public_style' , plugin_dir_url( __FILE__ ) . 'css/public-style.css', array() , WOVAX_Music_Manager::$version );
-		 wp_enqueue_style( 'font_awesome' , plugin_dir_url( __FILE__ ) . 'font-awesome/css/font-awesome.min.css', array() , WOVAX_Music_Manager::$version );
+		 wp_enqueue_style( 
+		 	'wovax_mm_public_style' , 
+			plugin_dir_url( __FILE__ ) . 'css/public-style.css', 
+			array() , 
+			WOVAX_Music_Manager::$version );
+		 wp_enqueue_style( 
+		 	'font_awesome' , 
+			plugin_dir_url( __FILE__ ) . 'font-awesome/css/font-awesome.min.css', 
+			array() , 
+			WOVAX_Music_Manager::$version );
 		 
-		 wp_enqueue_script( 'wovax_mm_public_script' , plugin_dir_url( __FILE__ ) . 'js/public-script.js', array('jquery') , WOVAX_Music_Manager::$version , true );
+		 wp_enqueue_script( 
+		 	'wovax_mm_public_script' , 
+			plugin_dir_url( __FILE__ ) . 'js/public-script.js', 
+			array('jquery') , 
+			WOVAX_Music_Manager::$version , true );
 		 
 	 } // end add_public_scripts
 	 
@@ -131,13 +149,39 @@ class WOVAX_Music_Manager {
 		 
 		 if ( $hook == 'post-new.php' || $hook == 'post.php' ) {
 					 
-			wp_enqueue_script(  'wovax_mm_selector_js', plugin_dir_url(  __FILE__  ) .'js/admin-script.js' , array('jquery-ui-draggable','jquery-ui-droppable','jquery-ui-sortable') , WOVAX_Music_Manager::$version , true );
+			wp_enqueue_script(  
+				'wovax_mm_selector_js', 
+				plugin_dir_url(  __FILE__  ) .'js/admin-script.js' , 
+				array('jquery-ui-draggable','jquery-ui-droppable','jquery-ui-sortable') , 
+				WOVAX_Music_Manager::$version , true );
 				
-			wp_enqueue_style( 'wovax_mm_admin_style' , plugin_dir_url( __FILE__ ) . 'css/admin-style.css', array() , WOVAX_Music_Manager::$version );
+			wp_enqueue_style( 
+				'wovax_mm_admin_style' , 
+				plugin_dir_url( __FILE__ ) . 'css/admin-style.css', 
+				array() , 
+				WOVAX_Music_Manager::$version );
 			
 		} // end if
 		 
 	 } // end add_admin_scripts
+	 
+	 
+	 /**
+	  * Flush reqrites since we are adding cpt and taxonomy
+	  */
+	public function wovax_mm_flush_rewrites() {
+		
+		require_once 'classes/class-wovax-mm-music.php'; 
+		$music = new WOVAX_MM_Music();
+		$music->register();
+
+		require_once 'classes/class-wovax-mm-music-category.php';
+		$music_category = new WOVAX_MM_Music_Category();
+		$music_category->register();
+		
+		flush_rewrite_rules();
+		
+	} // end wovax_mm_flush_rewrites
 	 
 	
 } // end WOVAX_Music_Manager

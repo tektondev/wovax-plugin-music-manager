@@ -15,13 +15,18 @@ class WOVAX_MM_Musicitems_Shortcode extends WOVAX_MM_Shortcode{
 	//@var string Slug for shortcode
 	protected $slug = 'musicitems';
 	
+	//@var array Defautls for shortcode
+	protected $defaults = array(
+		'title' => '',
+		'ids'   => array(),
+	);
+	
 	protected $library;
 
 	
 	public function __construct( $library ){
 		
 		$this->library = $library;
-		
 		
 	} // end __construct
 	
@@ -31,7 +36,7 @@ class WOVAX_MM_Musicitems_Shortcode extends WOVAX_MM_Shortcode{
 	 * @param array $atts Array of settings passed with the shortcode
 	 * @return string HTML output of the shortcode
 	 */
-	public function get_shortcode_display( $atts ){
+	public function get_shortcode_display( $atts ){ 
 		
 		$html = '';
 		
@@ -43,6 +48,17 @@ class WOVAX_MM_Musicitems_Shortcode extends WOVAX_MM_Shortcode{
 			
 			$music_array = $this->library->get_music_from_query( $query );
 			
+			$title = '';
+			
+			if ( ! empty( $atts['title'] ) ){
+				
+				$title = $atts['title'];
+				
+			} // end if
+			
+			ob_start();
+			include plugin_dir_path( dirname( __FILE__ ) ) . 'inc/music-set-header.php';
+			$html .= ob_get_clean();
 			
 			ob_start();
 			
