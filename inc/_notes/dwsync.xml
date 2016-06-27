@@ -3,8 +3,11 @@
 <file name="music-editor.php" server="ftp.contributelist.com//public_html/wovax.tektondev.com/wp-content/plugins/wovax-plugin-music-manager/" local="131102939579592789" remote="131102939400000000" Dst="2" />
 <file name="music-library-az-index.php" server="ftp.contributelist.com//public_html/wovax.tektondev.com/wp-content/plugins/wovax-plugin-music-manager/" local="131103950439205191" remote="131103950400000000" Dst="2" />
 <file name="music-item.php" server="ftp.contributelist.com//public_html/wovax.tektondev.com/wp-content/plugins/wovax-plugin-music-manager/" local="131104073409982656" remote="131104073400000000" Dst="2" />
-<file name="music-library-az-set.php" server="ftp.contributelist.com//public_html/wovax.tektondev.com/wp-content/plugins/wovax-plugin-music-manager/" local="131101171560160566" remote="131101171200000000" Dst="2" />
+<file name="music-library-az-set.php" server="ftp.contributelist.com//public_html/wovax.tektondev.com/wp-content/plugins/wovax-plugin-music-manager/" local="131115334358845178" remote="131115334200000000" Dst="2" />
 <file name="music-library-wrapper.php" server="ftp.contributelist.com//public_html/wovax.tektondev.com/wp-content/plugins/wovax-plugin-music-manager/" local="131104099339101330" remote="131104099200000000" Dst="2" />
 <file name="music-library-search.php" server="ftp.contributelist.com//public_html/wovax.tektondev.com/wp-content/plugins/wovax-plugin-music-manager/" local="131104048225979878" remote="131104048200000000" Dst="2" />
 <file name="music-single-subheader.php" server="ftp.contributelist.com//public_html/wovax.tektondev.com/wp-content/plugins/wovax-plugin-music-manager/" local="131110074855902163" remote="131110074600000000" Dst="2" />
+<file name="music-editor-selector.php" server="ftp.contributelist.com//public_html/wovax.tektondev.com/wp-content/plugins/wovax-plugin-music-manager/" local="131115327698510318" remote="131115327600000000" Dst="2" />
+<file name="music-editor-selector-music-item.php" server="ftp.contributelist.com//public_html/wovax.tektondev.com/wp-content/plugins/wovax-plugin-music-manager/" local="131111863928026725" remote="131111863800000000" Dst="2" />
+<file name="music-set-header.php" server="ftp.contributelist.com//public_html/wovax.tektondev.com/wp-content/plugins/wovax-plugin-music-manager/" local="131115334043665248" remote="131115333600000000" Dst="2" />
 </dwsync>
