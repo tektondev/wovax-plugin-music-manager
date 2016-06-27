@@ -2,6 +2,24 @@
 class WOVAX_MM_Library {
 	
 	
+	public function get_id_query( $ids ){
+		
+		$args = array(
+			'posts_per_page' => -1,
+			'orderby'        => 'post__in',
+			'post_type'      => 'music',
+			'post_status'    => 'publish',
+			'order'          => 'ASC',
+			'post__in'       => $ids,
+		);
+		
+		$query = new WP_Query( $args );
+		
+		return $query;
+		
+	} // end get_id_query
+	
+	
 	public function get_search_query( $s ){
 		
 		$query_args = $this->get_search_query_args( $s );

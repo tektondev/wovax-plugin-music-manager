@@ -21,7 +21,7 @@
 		 
 		 add_action('media_buttons', array( $this , 'add_music_button' ) );
 		 
-		 add_action('edit_form_after_title' , array( $this , 'the_selector_box' ) );
+		 add_action('admin_footer' , array( $this , 'the_selector_box' ) );
 		 
 
 		 
@@ -29,7 +29,7 @@
 	 
 	 public function add_music_button(){
 		 
-		 echo '<a href="#TB_inline?width=100%&inlineId=wovax-mm-selector&height=auto" id="insert-music" class="button thickbox">Add Music</a>';
+		 echo '<a href="#" id="mm-insert-music" class="button">Add Music</a>';
 		 
 	 }
 	 

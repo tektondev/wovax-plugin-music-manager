@@ -55,6 +55,9 @@ class WOVAX_Music_Manager {
 		 require_once 'classes/class-wovax-mm-library-shortcode.php';
 		 $library = new WOVAX_MM_Library_Shortcode( $music_category , $query );
 		 
+		 require_once 'classes/class-wovax-mm-musicitems-shortcode.php';
+		 $musicitems = new WOVAX_MM_Musicitems_Shortcode( $music_library );
+		 
 		 require_once 'classes/class-wovax-mm-ajax.php';
 		 $ajax = new WOVAX_MM_Ajax( $music_library );
 		 
@@ -63,6 +66,9 @@ class WOVAX_Music_Manager {
 		 
 		 // Add Shortcode
 		 add_action( 'init' , array( $library , 'register' ) );
+		 
+		 // Add Shortcode
+		 add_action( 'init' , array( $musicitems , 'register' ) );
 		 
 		 // Add Taxonomy
 		 add_action( 'init' , array( $music_category , 'register' ), 99 );

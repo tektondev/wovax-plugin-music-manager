@@ -14,17 +14,28 @@ var wovax_mm = {
 		
 		bind_events: function(){
 			
+			jQuery('body').on('click','#mm-insert-music', function( event ){ event.preventDefault(); wovax_mm.lb.show();});
+			
+			jQuery('body').on('click','.mm-close-modal', function( event ){ event.preventDefault(); wovax_mm.lb.hide();});
+			
 			wovax_mm.wrap.find('input[name="s_term"]').keyup( function(){ wovax_mm.form.do_search( true , jQuery( this ) ); });
 			
 			wovax_mm.wrap.find('footer input[type="submit"]').on( 'click' , function( event ){ event.preventDefault(); wovax_mm.form.insert(); });
 			
 			wovax_mm.wrap.find('#wovax-music-selector-results').on( 'click' , '.mm-add-music' , function( event ){ event.preventDefault(); wovax_mm.form.add_item( jQuery( this ) ); });
 			
+			wovax_mm.wrap.find('#wovax-music-selector-items').on( 'click' , '.mm-remove-music' , function( event ){ event.preventDefault(); wovax_mm.form.remove_item( jQuery( this ) ); });
+			
+			wovax_mm.wrap.find('input.mm-selector-search').on( 'click' , function( event ){ 
+				event.preventDefault(); 
+				wovax_mm.form.do_search( false , wovax_mm.wrap.find('input[name="s_term"]') ) 
+				});
+			
 		}, // end bind_events
 		
 		apply_sort: function( wrap ){
 			
-			wrap.find('.mm-items').sortable({
+			wrap.find('#wovax-music-selector-items.mm-items').sortable({
 				connectWith: '.mm-items',
 				stop: function( event, ui ) { wovax_mm.form.update_shortcode();}
 			}).disableSelection();
@@ -45,6 +56,10 @@ var wovax_mm = {
 		
 		get_search: function( val ){
 			
+			var r_wrap = wovax_mm.wrap.find('#wovax-music-selector-results');
+			
+			r_wrap.addClass('active');
+			
 			jQuery.post(
 			
 				ajaxurl,
@@ -53,11 +68,13 @@ var wovax_mm = {
 				
 				function( response ){
 					
-					var r_wrap = wovax_mm.wrap.find('#wovax-music-selector-results');
-					
 					r_wrap.empty();
 					
+					setTimeout( function(){ r_wrap.removeClass('active'); }, 100 );
+					
 					r_wrap.append( response );
+					
+					
 					
 				},
 				
@@ -104,7 +121,52 @@ var wovax_mm = {
 			
 		}, // end add item
 		
+		remove_item: function( ic ){
+			
+			ic.closest('li').slideUp('fast' , function(){ 
+				jQuery( this ).remove(); 
+				wovax_mm.form.update_shortcode();
+				});
+			
+			
+			
+		}, // end remove item
+		
 	}, // end form
+	
+	lb : {
+		
+		bg: jQuery('#wovax-mm-selector-bg'),
+		
+		frame: jQuery('#wovax-mm-selector'), 
+		
+		show: function(){
+			
+			wovax_mm.lb.bg.fadeIn('fast');
+			
+			wovax_mm.lb.frame.addClass('active');
+			
+			wovax_mm.lb.set_height();
+			
+		}, // end show
+		
+		hide: function(){
+			
+			wovax_mm.lb.bg.fadeOut('fast');
+			
+			wovax_mm.lb.frame.removeClass('active');
+			
+			wovax_mm.lb.frame.css('top', '-9999rem');
+			
+		}, // end show
+		
+		set_height: function(){
+			
+			wovax_mm.lb.frame.css( 'top' , jQuery( window ).scrollTop() ); 
+			
+		}
+		
+	}, // end lb
 	
 } // end wovax_mm
 
