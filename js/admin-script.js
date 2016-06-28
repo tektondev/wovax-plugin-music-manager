@@ -54,7 +54,7 @@ var wovax_mm = {
 			
 			if ( is_dynamic && ( val.length < 2 && val.length > 0 ) ) return;
 			
-			var data = wovax_mm.wrap.find('fieldset').serialize();
+			var data = wovax_mm.wrap.find('fieldset input, fieldset select').serialize();
 			
 			wovax_mm.form.get_search( data );
 			
