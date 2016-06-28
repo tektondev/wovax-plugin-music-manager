@@ -42,8 +42,6 @@
 	   $music_array = $this->library->get_music_from_query( $query );
 	   
 	   $music_terms = $this->music_category->get_select_terms();
-	  
-	   uasort( $music_array , array( $this->library , 'sort_search_array' ) );
 	   
 	   ob_start();
 	   
