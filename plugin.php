@@ -3,7 +3,7 @@
 Plugin Name: Wovax Music Manager
 Plugin URI: https://www.wovax.com/
 Description: This is the Wovax plugin for adding and categorizing music.
-Version: 0.0.4
+Version: 0.0.5
 Author: Wovax, LLC.
 Author URI: https://www.wovax.com/
 */
@@ -84,7 +84,7 @@ class WOVAX_Music_Manager {
 		 
 		 if ( is_admin() ){
 			 
-			 add_action( 'admin_enqueue_scripts', array( $this , 'add_admin_scripts' ), 11, 1 );
+			 add_action( 'admin_enqueue_scripts', array( $this , 'add_admin_scripts' ), 99, 1 );
 			 
 			 require_once 'classes/class-wovax-mm-selector.php';
 			 $music_selector = new WOVAX_MM_Selector( $music_library , $music_category );

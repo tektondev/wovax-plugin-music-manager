@@ -25,7 +25,8 @@
 		 
 		 add_action('media_buttons', array( $this , 'add_music_button' ) );
 		 
-		 add_action('admin_footer' , array( $this , 'the_selector_box' ) );
+		 add_action('admin_footer-post.php' , array( $this , 'the_selector_box' ), 1 );
+		 add_action('admin_footer-post-new.php' , array( $this , 'the_selector_box' ), 1 );
 		 
 	 }
 	 

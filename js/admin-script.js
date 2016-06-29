@@ -1,12 +1,16 @@
 var wovax_mm = {
 	
-	wrap: jQuery('#wovax-music-selector-form'),
+	wrap: '',
 	
 	init: function(){
+		
+		wovax_mm.wrap = jQuery('#wovax-music-selector-form');
 		
 		wovax_mm.form.bind_events();
 		
 		wovax_mm.form.apply_sort( wovax_mm.wrap );
+		
+		wovax_mm.lb.init();
 		
 	}, // end init
 	
@@ -160,9 +164,17 @@ var wovax_mm = {
 	
 	lb : {
 		
-		bg: jQuery('#wovax-mm-selector-bg'),
+		bg: false,
 		
-		frame: jQuery('#wovax-mm-selector'), 
+		frame: false, 
+		
+		init: function(){
+			
+			wovax_mm.lb.bg = jQuery('#wovax-mm-selector-bg');
+		
+			wovax_mm.lb.frame = jQuery('#wovax-mm-selector'); 
+			
+		},
 		
 		show: function(){
 			
@@ -194,4 +206,4 @@ var wovax_mm = {
 	
 } // end wovax_mm
 
-wovax_mm.init();
+jQuery(document).ready( function(){ wovax_mm.init() });
