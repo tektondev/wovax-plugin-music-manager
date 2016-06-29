@@ -3,7 +3,7 @@
 Plugin Name: Wovax Music Manager
 Plugin URI: https://www.wovax.com/
 Description: This is the Wovax plugin for adding and categorizing music.
-Version: 0.0.4
+Version: 0.0.5
 Author: Wovax, LLC.
 Author URI: https://www.wovax.com/
 */
