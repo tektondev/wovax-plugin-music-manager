@@ -141,6 +141,10 @@ var wovax_mm = {
 			
 			wovax_mm.query.set_active( wrap );
 			
+			console.log( data );
+			
+			console.log( wovax_mm_ajax_url + '?wovax_mm_ajax=query&query_type=' + query_type );
+			
 			jQuery.get(
 				wovax_mm_ajax_url + '?wovax_mm_ajax=query&query_type=' + query_type,
 				data,

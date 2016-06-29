@@ -114,7 +114,25 @@ class WOVAX_Music_Manager {
 			 
 		 } // end if 
 		 
+		if ( isset( $_GET['wovax_mm_ajax'] ) ){
+		 
+			//add_action( 'pre_get_posts', array( $this , 'check_query'),9999 );
+		 
+		} // end if
+		 
 	 } // end init
+	 
+	 public function check_query( $query ){
+		 
+		 //if ( ! is_main_query() ){
+		 
+		 	$query->set('post_type', array( 'music' ) );
+		 
+		 ///}
+		 
+		 //var_dump( $query );
+		 
+	 } // end $query
 	 
 	 
 	 /**

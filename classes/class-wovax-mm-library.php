@@ -35,6 +35,8 @@ class WOVAX_MM_Library {
 		
 		$query_args = $this->get_search_query_args( $s );
 		
+		//if ( isset( $_GET['wovax_mm_ajax'] ) && is_user_logged_in() ) var_dump( $query_args );
+		
 		$meta_args = $this->get_search_query_args( $s , true );
 		
 		$query = new WP_Query( $query_args );
@@ -83,7 +85,7 @@ class WOVAX_MM_Library {
 	 * @param bool $is_meta Do meta search
 	 * @return array WP Query args
 	 */
-	public function get_search_query_args( $s , $is_meta = false ){
+	public function get_search_query_args( $s , $is_meta = false ){ 
 		
 		$args = array(
 			'posts_per_page' => 20,

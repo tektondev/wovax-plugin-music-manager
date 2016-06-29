@@ -162,6 +162,12 @@ class WOVAX_MM_Library_Shortcode extends WOVAX_MM_Shortcode{
 		
 		$query = $this->library->get_search_query( $s );
 		
+		//if ( is_user_logged_in() ){
+			
+			//var_dump( $query );
+			
+		//}
+		
 		$music_array = $this->library->get_music_from_query( $query );
 		
 		return $this->library->get_music_items_html( $music_array );
