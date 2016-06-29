@@ -1,5 +1,5 @@
 
-<div id="wovax-mm-selector" style="display:none">
+<div id="wovax-mm-selector" style="top:-9999rem;position:absolute;">
 	<div>
     	<div id="wovax-music-selector-form">
         	<header>
